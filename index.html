@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#12281f" />
+    <title>Exploration — Find your next horizon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+    <style>
+      :root { --ink:#f7f3e9; --muted:#c4c9be; --pine:#12281f; --moss:#346249; --lime:#c6e477; --clay:#e39165; --sun:#f3bd5b; }
+      * { box-sizing:border-box; }
+      body { margin:0; background:var(--pine); color:var(--ink); font-family:"DM Sans",sans-serif; overflow-x:hidden; }
+      a { color:inherit; text-decoration:none; }
+      .shell { max-width:1440px; min-height:100vh; margin:auto; padding:28px 4.2vw 42px; position:relative; overflow:hidden; }
+      .shell::before { content:""; position:absolute; width:680px; height:680px; right:-285px; top:-290px; border:1px solid rgba(198,228,119,.18); border-radius:50%; box-shadow:0 0 0 58px rgba(198,228,119,.035), 0 0 0 116px rgba(198,228,119,.025); pointer-events:none; }
+      nav { display:flex; justify-content:space-between; align-items:center; position:relative; z-index:2; }
+      .brand { font-family:"Playfair Display",serif; font-size:26px; letter-spacing:-1.3px; }
+      .brand span { color:var(--lime); }
+      .links { display:flex; align-items:center; gap:32px; color:#dfe6da; font-size:14px; }
+      .links a:not(.button) { opacity:.82; transition:opacity .2s; }
+      .links a:hover { opacity:1; }
+      .button { display:inline-flex; align-items:center; justify-content:center; gap:9px; border:0; cursor:pointer; font:600 14px "DM Sans",sans-serif; padding:13px 20px; border-radius:100px; background:var(--lime); color:#152a20; transition:transform .2s, background .2s; }
+      .button:hover { transform:translateY(-2px); background:#d6ee92; }
+      .hero { position:relative; z-index:1; min-height:600px; display:grid; grid-template-columns:1.08fr .92fr; align-items:center; gap:5vw; padding:68px 0 39px; }
+      .eyebrow { display:flex; align-items:center; gap:10px; font:500 11px "DM Mono",monospace; letter-spacing:.1em; text-transform:uppercase; color:var(--lime); }
+      .eyebrow::before { content:""; width:26px; height:1px; background:currentColor; }
+      h1 { max-width:720px; margin:19px 0 21px; font:600 clamp(52px,6.2vw,93px)/.98 "Playfair Display",serif; letter-spacing:-.06em; }
+      h1 em { color:var(--lime); font-weight:600; }
+      .intro { max-width:515px; margin:0; font-size:18px; line-height:1.55; color:var(--muted); }
+      .hero-actions { display:flex; align-items:center; gap:25px; margin-top:31px; }
+      .round-play { width:48px; height:48px; border-radius:50%; border:1px solid rgba(247,243,233,.35); background:transparent; color:var(--ink); font-size:13px; cursor:pointer; }
+      .watch { display:flex; gap:11px; align-items:center; color:#e7eade; font-size:14px; }
+      .visual { position:relative; height:460px; }
+      .orb { position:absolute; border-radius:50%; overflow:hidden; }
+      .orb-main { width:378px; height:378px; top:15px; left:50%; transform:translateX(-50%); background:linear-gradient(145deg,#e6a353 0 25%,#5b855e 25% 44%,#d9e9ac 44% 58%,#668f94 58%); box-shadow:0 20px 70px rgba(0,0,0,.22); }
+      .orb-main::before { content:""; position:absolute; inset:-12%; background:repeating-linear-gradient(115deg,transparent 0 29px,rgba(255,255,235,.32) 30px 36px,transparent 37px 62px), repeating-radial-gradient(ellipse at 25% 65%,rgba(21,50,39,.9) 0 12px,transparent 13px 34px); mix-blend-mode:overlay; transform:rotate(-15deg); }
+      .orb-main::after { content:""; position:absolute; width:290px; height:115px; left:22px; bottom:-16px; border-radius:50%; background:#184837; transform:rotate(-7deg); box-shadow:0 -12px 0 rgba(99,159,99,.65), 80px -31px 0 -11px #d6e5a7; }
+      .orb-small { width:126px; height:126px; background:radial-gradient(circle at 37% 30%,#f8d990 0 5%,transparent 6%),linear-gradient(145deg,#a8d0d0 20%,#4d8e80 21% 50%,#f2b167 51%); top:292px; left:3%; border:7px solid var(--pine); }
+      .tag { position:absolute; right:0; top:77px; background:#f9f5e9; color:#1b3127; border-radius:8px; padding:14px 17px; box-shadow:0 12px 30px rgba(0,0,0,.16); transform:rotate(5deg); }
+      .tag strong { display:block; font:600 11px "DM Mono",monospace; letter-spacing:.08em; text-transform:uppercase; color:#568063; }
+      .tag span { display:block; margin-top:4px; font:600 15px "DM Sans",sans-serif; }
+      .coords { position:absolute; bottom:1px; right:7%; font:11px "DM Mono",monospace; color:rgba(247,243,233,.56); letter-spacing:.09em; }
+      .discovery { border-top:1px solid rgba(247,243,233,.18); padding-top:22px; display:grid; grid-template-columns:1fr 2.3fr; align-items:start; gap:34px; position:relative; z-index:2; }
+      .discovery h2 { font:500 14px "DM Mono",monospace; letter-spacing:.06em; text-transform:uppercase; margin:0; color:var(--lime); }
+      .places { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+      .place { min-height:97px; padding:15px 16px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.09); border-radius:10px; transition:background .2s,transform .2s; }
+      .place:hover { transform:translateY(-3px); background:rgba(255,255,255,.1); }
+      .place .number { color:var(--lime); font:11px "DM Mono",monospace; }
+      .place h3 { margin:17px 0 0; font-size:17px; letter-spacing:-.02em; }
+      .place p { margin:3px 0 0; font-size:12px; color:var(--muted); }
+      .menu { display:none; }
+      @media (max-width:760px) { .shell { padding:23px 22px 30px; } .links a:not(.button) { display:none; } .menu { display:block; padding:0; background:none; border:0; color:var(--ink); font-size:20px; } .links { gap:16px; } .links .button { padding:10px 14px; } .hero { grid-template-columns:1fr; padding:60px 0 25px; gap:9px; } h1 { font-size:57px; } .intro { font-size:16px; } .visual { height:362px; margin-top:5px; } .orb-main { width:292px; height:292px; left:54%; } .orb-small { width:102px; height:102px; top:232px; left:0; } .tag { top:32px; right:1%; } .discovery { grid-template-columns:1fr; gap:17px; } .places { grid-template-columns:1fr; } .place { min-height:75px; } .place h3 { margin-top:8px; } }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <nav aria-label="Main navigation">
+        <a class="brand" href="#top">Explora<span>tion.</span></a>
+        <div class="links"><a href="#discover">Discover</a><a href="#journal">Journal</a><a href="#about">Our story</a><a class="button" href="#discover">Start exploring <span>↗</span></a><button class="menu" aria-label="Open menu">☰</button></div>
+      </nav>
+      <section class="hero" id="top">
+        <div class="hero-copy">
+          <div class="eyebrow">The world, closer</div>
+          <h1>Go where the <em>map</em> runs out.</h1>
+          <p class="intro">A slower way to find places that shift your perspective — from forest paths and coastal towns to the corners of your own city.</p>
+          <div class="hero-actions"><a class="button" href="#discover">Find an adventure <span>→</span></a><a class="watch" href="#journal"><button class="round-play" aria-label="Play our story">▶</button> See how we explore</a></div>
+        </div>
+        <div class="visual" aria-label="An abstract landscape illustration">
+          <div class="orb orb-main"></div><div class="orb orb-small"></div>
+          <div class="tag"><strong>Featured escape</strong><span>Isle of Skye, Scotland</span></div>
+          <span class="coords">57.5359° N &nbsp; 6.2260° W</span>
+        </div>
+      </section>
+      <section class="discovery" id="discover">
+        <h2>Places to begin <span>↓</span></h2>
+        <div class="places">
+          <a class="place" href="#"><span class="number">01 / Wild</span><h3>Cabin country</h3><p>For quiet mornings</p></a>
+          <a class="place" href="#"><span class="number">02 / Coast</span><h3>Edge of the sea</h3><p>For salt-air resets</p></a>
+          <a class="place" href="#"><span class="number">03 / City</span><h3>After-hours streets</h3><p>For curious evenings</p></a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
