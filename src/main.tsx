@@ -8,7 +8,7 @@ import './style.css';
 
 const supabase=createClient(import.meta.env.VITE_SUPABASE_URL||'https://ktophzsjvpvcvujqymqw.supabase.co',import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY||'sb_publishable_1TQAd5MDmrRebBYQQpDwvQ_VZnmpfMr');
 type Snapshot={tick:number;phase:string;timeLeft:number;players:Array<{id:string;name:string;team:string;health:number;x:number;y:number;kills:number;deaths:number}>;events:Array<{type:string;targetId?:string;playerId?:string}>};
-function serverUrl(){const configured=import.meta.env.VITE_GAME_SERVER_URL;if(configured)return configured;return `${location.protocol==='https:'?'wss':'ws'}://${location.hostname}:8787/ws`}
+function serverUrl(){const configured=import.meta.env.VITE_GAME_SERVER_URL;if(configured)return configured;const host=location.hostname.replace(/^\d+-/,'8787-');return `${location.protocol==='https:'?'wss':'ws'}://${host}/ws`}
 function App(){
  const mount=useRef<HTMLDivElement>(null);const socket=useRef<WebSocket|null>(null);const seq=useRef(0);const keys=useRef(new Set<string>());const [character,setCharacter]=useState<CharacterId>('diego');const [event,setEvent]=useState('Connecting to authoritative room…');const [health,setHealth]=useState(100);const [room,setRoom]=useState('ALPHA-01');const [name,setName]=useState('Rookie');const [connection,setConnection]=useState('CONNECTING');const [phase,setPhase]=useState('LOBBY');const [snapshot,setSnapshot]=useState<Snapshot>();const [mobile,setMobile]=useState(false);
  const selected=CHARACTERS.find(c=>c.id===character)!;
