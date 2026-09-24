@@ -36,3 +36,9 @@ The GitHub repository is being renamed from `Exploration-` to `IMPACT--`. GitHub
 ## Later Chillverse integration
 
 The current build does not depend on `https://chillverse.com.ng/`. Once the standalone loop is approved, the next integration phase can expose the game as an embeddable module with a documented launch contract, parent-window messaging, resize handling, and any required account/session bridge. That work is intentionally deferred until the core game is stable.
+
+## Blueprint asset implementation
+
+The current build uses the supplied GrafxKid ecosystem as its visual anchor. It includes four character identities with distinct attacks: Toggle poison bubbles, Tracy crossbow arrows, Percy fireballs, and Angie seed clusters. It also uses the supplied Grassland, Autumn Forest, Tropics, and Winter World backgrounds and terrain sheets, plus a Cave mode built from the supplied universal rock, blocks, lava, and destruction-compatible tiles. The Mini FX, Items & UI pack supplies explosion, dust, sparkle, health, cursor, emote, and pickup assets.
+
+The combat loop now connects character identity to projectile silhouette and impact behavior. Terrain rotation changes the visible biome and material note, while impact resolution emits material-aware debris and updates destructible cover. The game remains a standalone local 2v2 test with automated opponents; the real-time Colyseus server and Chillverse embedding remain a separate integration phase.
