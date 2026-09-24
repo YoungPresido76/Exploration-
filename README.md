@@ -31,8 +31,14 @@ pnpm dev
 
 The server boundary can be started separately with `pnpm server`. Copy `.env.example` to `.env.local` for local configuration; never place a Supabase service-role key in frontend variables.
 
+## M2 authoritative room slice
+
+The current build now includes a native WebSocket room server with a 30 Hz authoritative simulation. Rooms accept up to four players, assign alternating red/blue teams, transition from lobby to warmup when full, validate sequenced input commands, simulate movement and firing on the server, resolve damage and respawns, emit snapshots, and persist periodic match events to Supabase when a service-role key is configured. The terrain is represented as a 4×4-cell grid with material and hit points; shot impacts can remove cells and are included in the event stream.
+
+The browser client connects to `/ws`, sends input intent at 30 Hz, displays the latest server tick and room state, and uses the server health/player snapshot for the HUD. The current Phaser visual is still the M0 training-range renderer; the next client pass will replace its local visual state with interpolated remote player and terrain state.
+
 ## Next build slices
 
-The next slices are the authoritative 30 Hz Colyseus room, 4×4 terrain destruction grid, client prediction/reconciliation, character-specific supplied sprites and projectiles, lane switching, respawn, and a four-player room flow. The Supabase schema is ready to persist room metadata and match events without putting database writes on the simulation tick.
+The next slices are client-side prediction and reconciliation against the authoritative snapshot, remote-player interpolation, real four-player lobby/ready UI, lane switching, character-specific supplied sprites and projectiles, and a production room deployment. Supabase remains persistence and analytics rather than the simulation transport.
 
 The supplied GrafxKid CC0 license remains in the asset archive and must stay with any imported asset expansion.
